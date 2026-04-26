@@ -1,0 +1,101 @@
+import React from 'react';
+import { Bed, Bath, Move, Heart, MapPin } from 'lucide-react';
+import Image from 'next/image';
+
+interface PropertyProps {
+  property: {
+    id: number | string;
+    title: string;
+    location: string;
+    price: number | string;
+    beds: number;
+    baths: number;
+    sqft: number;
+    tag?: string;
+    image: string;
+  };
+}
+
+const PropertyCard = ({ property }: PropertyProps) => {
+  return (
+    <div className="group bg-white rounded-3xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-2xl hover:-translate-y-2 transition-all duration-500">
+      
+      {/* Image Container */}
+      <div className="relative h-64 w-full overflow-hidden">
+        <img 
+          src={property.image} 
+          alt={property.title}
+          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+        />
+        
+        {/* Status Tag */}
+        {property.tag && (
+          <div className="absolute top-4 left-4">
+            <span className="bg-white/90 backdrop-blur-md px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest text-gray-900 shadow-sm">
+              {property.tag}
+            </span>
+          </div>
+        )}
+
+        {/* Favorite Button */}
+        <button className="absolute top-4 right-4 p-2.5 bg-white/20 backdrop-blur-md rounded-full text-white hover:bg-white hover:text-red-600 transition-all duration-300">
+          <Heart size={18} />
+        </button>
+
+        {/* Price Overlay */}
+        <div className="absolute bottom-4 left-4">
+          <div className="bg-red-600 text-white px-4 py-2 rounded-xl font-bold shadow-lg">
+            £{property.price.toLocaleString()}<span className="text-xs font-normal opacity-80"> / mo</span>
+          </div>
+        </div>
+      </div>
+
+      {/* Content Area */}
+      <div className="p-6">
+        <div className="flex items-start justify-between mb-2">
+          <h3 className="text-xl font-bold text-gray-900 group-hover:text-red-600 transition-colors">
+            {property.title}
+          </h3>
+        </div>
+
+        <div className="flex items-center gap-1 text-gray-500 text-sm mb-6">
+          <MapPin size={14} className="text-red-500" />
+          {property.location}
+        </div>
+
+        {/* Specs Grid */}
+        <div className="grid grid-cols-3 gap-4 py-4 border-t border-gray-50">
+          <div className="flex flex-col items-center gap-1">
+            <div className="p-2 bg-gray-50 rounded-lg group-hover:bg-red-50 transition-colors">
+              <Bed size={18} className="text-gray-600 group-hover:text-red-600" />
+            </div>
+            <span className="text-[11px] font-bold text-gray-400 uppercase tracking-tighter">{property.beds} Beds</span>
+          </div>
+          
+          <div className="flex flex-col items-center gap-1">
+            <div className="p-2 bg-gray-50 rounded-lg group-hover:bg-red-50 transition-colors">
+              <Bath size={18} className="text-gray-600 group-hover:text-red-600" />
+            </div>
+            <span className="text-[11px] font-bold text-gray-400 uppercase tracking-tighter">{property.baths} Baths</span>
+          </div>
+
+          <div className="flex flex-col items-center gap-1">
+            <div className="p-2 bg-gray-50 rounded-lg group-hover:bg-red-50 transition-colors">
+              <Move size={18} className="text-gray-600 group-hover:text-red-600" />
+            </div>
+            <span className="text-[11px] font-bold text-gray-400 uppercase tracking-tighter">{property.sqft} sqft</span>
+          </div>
+        </div>
+
+        {/* Action Button */}
+        <a href={`/properties/${property.id}`} className="w-full mt-4 py-3 bg-red-600 text-white text-sm font-bold rounded-xl hover:bg-red-700 transition-all duration-300">
+        <button className="w-full mt-4 py-3 bg-gray-900 text-white text-sm font-bold rounded-xl hover:bg-red-600 transition-all duration-300">
+          View Details
+        </button>
+        </a>
+      </div>
+    </div>
+  );
+};
+
+export default PropertyCard;
