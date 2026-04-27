@@ -6,7 +6,6 @@ import PropertyListingPage from "@/components/properties/property_listing_page";
 export default function Properties(){
     return (
         <>
-        <Navbar/>
         <PropertyListingPage/>
         <Footer/>
         </>

@@ -1,5 +1,5 @@
 import React from 'react';
-import YieldCalculator from '@/components/YieldCalculator';
+import YieldCalculator from '@/components/yield_calculator';
 import { BarChart3, TrendingUp, PieChart, ShieldCheck, ArrowUpRight } from 'lucide-react';
 
 const InvestorPage = () => {
