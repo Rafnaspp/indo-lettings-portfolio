@@ -1,9 +1,11 @@
 import React from 'react';
 import { Search, MapPin } from 'lucide-react';
+import Navbar from './navBar';
 
 const Hero = () => {
   return (
     <section className="relative w-full min-h-[85vh] flex flex-col justify-center">
+      <Navbar/>
       {/* Background Image with Overlay */}
       <div 
         className="absolute inset-0 bg-cover bg-center z-0"

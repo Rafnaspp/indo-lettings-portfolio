@@ -1,6 +1,6 @@
 import React from 'react';
 import { Bed, Bath, Move, Heart, MapPin } from 'lucide-react';
-import Image from 'next/image';
+import Link from 'next/link';
 
 interface PropertyProps {
   property: {
@@ -8,11 +8,12 @@ interface PropertyProps {
     title: string;
     location: string;
     price: number | string;
-    beds: number;
+    beds: number | string;
     baths: number;
     sqft: number;
     tag?: string;
     image: string;
+    mode?: 'rent' | 'buy';
   };
 }
 
@@ -29,10 +30,18 @@ const PropertyCard = ({ property }: PropertyProps) => {
         />
         
         {/* Status Tag */}
-        {property.tag && (
+        {property.mode && (
+          <div className="absolute top-4 left-4">
+            <span className={`px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest shadow-sm ${
+              property.mode === 'rent' ? 'bg-blue-600 text-white' : 'bg-green-600 text-white'
+            }`}>
+              {property.mode === 'rent' ? 'For Rent' : 'For Sale'}
+            </span>
+          </div>
+        ) || property.price && (
           <div className="absolute top-4 left-4">
             <span className="bg-white/90 backdrop-blur-md px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest text-gray-900 shadow-sm">
-              {property.tag}
+              {property.price}
             </span>
           </div>
         )}
@@ -45,7 +54,8 @@ const PropertyCard = ({ property }: PropertyProps) => {
         {/* Price Overlay */}
         <div className="absolute bottom-4 left-4">
           <div className="bg-red-600 text-white px-4 py-2 rounded-xl font-bold shadow-lg">
-            £{property.price.toLocaleString()}<span className="text-xs font-normal opacity-80"> / mo</span>
+            £{Number(property.price).toLocaleString()}
+            {property.mode === 'rent' && <span className="text-xs font-normal opacity-80"> / mo</span>}
           </div>
         </div>
       </div>
@@ -88,11 +98,9 @@ const PropertyCard = ({ property }: PropertyProps) => {
         </div>
 
         {/* Action Button */}
-        <a href={`/properties/${property.id}`} className="w-full mt-4 py-3 bg-red-600 text-white text-sm font-bold rounded-xl hover:bg-red-700 transition-all duration-300">
-        <button className="w-full mt-4 py-3 bg-gray-900 text-white text-sm font-bold rounded-xl hover:bg-red-600 transition-all duration-300">
-          View Details
-        </button>
-        </a>
+        <Link href={`/properties/${property.id}`} className="block w-full mt-4 py-3 bg-gray-900 text-white text-center text-sm font-bold rounded-xl hover:bg-red-600 transition-all duration-300">
+            View Details
+        </Link>
       </div>
     </div>
   );
