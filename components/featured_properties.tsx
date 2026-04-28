@@ -14,11 +14,9 @@ const FeaturedProperties = () => {
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900">Featured Properties</h2>
             <p className="text-gray-500 mt-2">Explore our hand-picked selection of premium listings.</p>
           </div>
-          <a href="/properties" >
-          <button className="hidden md:block text-red-600 font-semibold border-b-2 border-red-600 hover:text-red-700 transition-colors">
+          <Link href="/properties" className="hidden md:block text-red-600 font-semibold border-b-2 border-red-600 hover:text-red-700 transition-colors">
             View All Properties
-          </button>
-          </a>
+          </Link>
         </div>
 
         {/* Grid Area */}
@@ -40,9 +38,9 @@ const FeaturedProperties = () => {
                     {prop.status}
                   </span>
                 </div>
-                <button className="absolute top-4 right-4 p-2 bg-white/20 backdrop-blur-md rounded-full text-white hover:bg-white hover:text-red-600 transition-all">
+                <div className="absolute top-4 right-4 p-2 bg-white/20 backdrop-blur-md rounded-full text-white hover:bg-white hover:text-red-600 transition-all">
                   <Heart size={20} />
-                </button>
+                </div>
               </div>
 
               {/* Content Area */}

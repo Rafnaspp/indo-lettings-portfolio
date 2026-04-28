@@ -1,8 +1,9 @@
 'use client';
-import React, { useState, useMemo, useEffect } from 'react';
+import React, { useState, useMemo, useEffect, Suspense } from 'react';
 import PropertyFilter from '@/components/properties/propperty_filter';
 import PropertyCard from './property_card';
 import { featuredProperties } from '@/data/all_properties';
+import { Property } from '@/data/properties';
 import GlassyNavBar from '../glassyNavBar';
 import { useSearchParams } from 'next/navigation';
 
@@ -14,7 +15,7 @@ const getPropertyBeds = (beds: string | number): number => {
   return Number(beds);
 };
 
-const PropertyListingPage = () => {
+const PropertyListingContent = () => {
   const searchParams = useSearchParams();
   
   const [searchQuery, setSearchQuery] = useState('');
@@ -99,7 +100,7 @@ const PropertyListingPage = () => {
   useEffect(() => { setCurrentPage(1); }, [searchQuery, mode, availability, minPrice, maxPrice, minBeds, maxBeds, minBaths, minSqft, minAcres, selectedPropertyTypes, selectedAccessibilityFeatures, selectedFeatures]);
 
   const filteredProperties = useMemo(() => {
-    return (featuredProperties as any[]).filter(property => {
+    return (featuredProperties as Property[]).filter(property => {
       const matchesSearch = 
         property.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
         (property.location || '').toLowerCase().includes(searchQuery.toLowerCase());
@@ -158,9 +159,7 @@ const PropertyListingPage = () => {
   }, [filteredProperties, startIndex]);
 
   return (
-    <main className="min-h-screen bg-white">
-      <GlassyNavBar />
-      
+    <>
       {/* Hero Section Wrapper with Background Image */}
       <div className="relative pt-32 pb-8 bg-white">
         {/* Header Content - positioned above the overlay */}
@@ -180,9 +179,9 @@ const PropertyListingPage = () => {
             availability={availability}
             setAvailability={setAvailability}
             currency={currency}
-            setCurrency={setCurrency}
+            setCurrency={setCurrency} 
             minPrice={minPrice} setMinPrice={setMinPrice}
-            maxPrice={maxPrice} setMaxPrice={maxPrice}
+            maxPrice={maxPrice} setMaxPrice={setMaxPrice}
             minBeds={minBeds} setMinBeds={setMinBeds}
             maxBeds={maxBeds} setMaxBeds={setMaxBeds}
             minBaths={minBaths} setMinBaths={setMinBaths}
@@ -252,6 +251,24 @@ const PropertyListingPage = () => {
           </div>
         )}
       </section>
+    </>
+  );
+};
+
+const PropertyListingPage = () => {
+  return (
+    <main className="min-h-screen bg-white">
+      <GlassyNavBar />
+      <div className="min-h-screen">
+        <Suspense fallback={
+          <div className="flex flex-col items-center justify-center min-h-[60vh] pt-32">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-red-600 mb-4"></div>
+            <p className="text-gray-500 font-medium">Loading properties...</p>
+          </div>
+        }>
+          <PropertyListingContent />
+        </Suspense>
+      </div>
     </main>
   );
 };

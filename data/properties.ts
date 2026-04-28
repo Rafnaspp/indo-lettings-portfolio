@@ -1,13 +1,20 @@
 export interface Property {
   id: string;
   title: string;
-  address: string;
+  address?: string;
+  location?: string;
   price: string;
-  beds: number;
+  beds: number | string;
   baths: number;
   sqft: number;
   image: string;
-  status: 'New' | 'Reduced' | 'Hot';
+  status: string;
+  type?: string;
+  mode?: 'buy' | 'rent';
+  description?: string;
+  propertyType?: string;
+  features?: string[];
+  landAcres?: number;
 }
 
 export const featuredProperties: Property[] = [

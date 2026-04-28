@@ -1,3 +1,4 @@
+import { Property } from './properties';
 export const featuredProperties: Property[] = [
   // --- RESIDENTIAL BUY ---
   {

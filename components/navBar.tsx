@@ -58,7 +58,7 @@ const Navbar = () => {
     },
     { 
       name: 'Sell or let', 
-      href: '#', 
+      href: '/', 
       isMega: true,
       description: "As local experts with global reach, we’ll help you find the right buyer or tenant for your property.",
       sections: [
@@ -90,7 +90,7 @@ const Navbar = () => {
     },
     { 
       name: 'Our services', 
-      href: '#', 
+      href: '/', 
       isMega: true,
       description: "From property management to financial services, we offer a complete suite of solutions for all your real estate needs.",
       sections: [
@@ -108,7 +108,7 @@ const Navbar = () => {
     },
     { 
       name: 'Mortgages', 
-      href: '#', 
+      href: '/', 
       isMega: true,
       description: "Navigate the mortgage market with confidence. Our experts provide tools and advice to help you secure the best deal.",
       sections: [
@@ -126,7 +126,7 @@ const Navbar = () => {
     },
     { 
       name: 'About', 
-      href: '#', 
+      href: '/', 
       isMega: true,
       description: "Learn about IndoLettings, our commitment to excellence, and our dedicated team of property experts.",
       sections: [
@@ -182,10 +182,10 @@ const Navbar = () => {
                 }`}
               >
                 {link.name}
-                {(link.dropdown || link.isMega) && <ChevronDown className="ml-1 w-4 h-4 opacity-70" />}
+                {link.isMega && <ChevronDown className="ml-1 w-4 h-4 opacity-70" />}
               </Link>
               
-              {link.isMega ? (
+              {link.isMega && (
                 <div className="fixed left-0 right-0 mt-2 mx-auto max-w-7xl w-[95%] bg-white border border-gray-100 shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50 rounded-[40px] overflow-hidden p-12">
                   <div className="grid grid-cols-12 gap-10 p-4">
                     <div className="col-span-4 border-r border-gray-100 pr-10">
@@ -222,18 +222,6 @@ const Navbar = () => {
                       ))}
                     </div>
                   </div>
-                </div>
-              ) : link.dropdown && (
-                <div className="absolute left-0 mt-2 w-full bg-white border border-gray-100 shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50 rounded-2xl overflow-hidden py-2">
-                  {link.dropdown.map((item) => (
-                    <Link
-                      key={item.name}
-                      href={item.href}
-                      className="block px-6 py-3 text-sm text-gray-600 hover:bg-red-50 hover:text-red-600 transition-colors"
-                    >
-                      {item.name}
-                    </Link>
-                  ))}
                 </div>
               )}
             </div>
@@ -274,7 +262,7 @@ const Navbar = () => {
               {navLinks.map((link) => (
                 <div key={link.name}>
                   <p className="text-xs font-black text-red-600 uppercase tracking-widest mb-3">{link.name}</p>
-                  {link.isMega ? (
+                  {link.isMega && (
                     <div className="space-y-4 pl-2">
                       {link.sections?.map((section) => (
                         <div key={section.title} className="space-y-2">
@@ -287,19 +275,6 @@ const Navbar = () => {
                         </div>
                       ))}
                     </div>
-                  ) : (
-                  <div className="grid grid-cols-1 gap-4 pl-2">
-                    {link.dropdown?.map((item) => (
-                      <Link
-                        key={item.name}
-                        href={item.href}
-                        onClick={() => setIsOpen(false)}
-                        className="text-lg font-bold text-gray-800"
-                      >
-                        {item.name}
-                      </Link>
-                    ))}
-                  </div>
                   )}
                 </div>
               ))}

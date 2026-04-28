@@ -9,7 +9,13 @@ import YieldCalculator from '@/components/yield_calculator';
 import PropertyFilter from '@/components/properties/propperty_filter';
 
 // This object maps the slugs to their specific content
-const serviceContent: any = {
+interface ServiceData {
+  title: string;
+  subtitle: string;
+  description: string;
+}
+
+const serviceContent: Record<string, ServiceData> = {
   'sale': {
     title: "Property for Sale",
     subtitle: "Achieve the best market price with our bespoke sales strategy and global reach.",
@@ -45,15 +51,43 @@ const SingleServicePage = () => {
   // State for PropertyFilter
   const [searchQuery, setSearchQuery] = useState('');
   const [mode, setMode] = useState<'buy' | 'rent'>(slug === 'sale' ? 'buy' : 'rent');
-  const [type, setType] = useState('all');
-  const [beds, setBeds] = useState('all');
+  const [availability, setAvailability] = useState('all');
+  const [currency, setCurrency] = useState('GBP');
   const [minPrice, setMinPrice] = useState('');
   const [maxPrice, setMaxPrice] = useState('');
+  const [minBeds, setMinBeds] = useState('');
+  const [maxBeds, setMaxBeds] = useState('');
+  const [minBaths, setMinBaths] = useState('0');
+  const [minSqft, setMinSqft] = useState('');
+  const [minAcres, setMinAcres] = useState('');
+  const [selectedPropertyTypes, setSelectedPropertyTypes] = useState<string[]>([]);
+  const [selectedAccessibilityFeatures, setSelectedAccessibilityFeatures] = useState<string[]>([]);
+  const [selectedFeatures, setSelectedFeatures] = useState<string[]>([]);
 
   // Update filter mode based on the current service slug
   useEffect(() => {
     setMode(slug === 'sale' ? 'buy' : 'rent');
   }, [slug]);
+
+  const onApplyFilters = () => {
+    // This function can be used to trigger a re-render or data fetch
+  };
+
+  const onClearAllFilters = () => {
+    setAvailability('all');
+    setCurrency('GBP');
+    setMinPrice('');
+    setMaxPrice('');
+    setMinBeds('');
+    setMaxBeds('');
+    setMinBaths('0');
+    setMinSqft('');
+    setMinAcres('');
+    setSelectedPropertyTypes([]);
+    setSelectedAccessibilityFeatures([]);
+    setSelectedFeatures([]);
+    setSearchQuery('');
+  };
 
   // Fallback if slug doesn't exist
   if (!data) return <div className="pt-40 text-center">Service not found.</div>;
@@ -75,19 +109,37 @@ const SingleServicePage = () => {
             {(slug === 'sale' || slug === 'residential' || slug === 'commercial') && (
                 <div className="pt-10 border-t border-gray-100">
                     <h3 className="text-2xl font-bold mb-6">Current Listings</h3>
-                    <PropertyFilter 
+                    <PropertyFilter
                       searchQuery={searchQuery}
                       setSearchQuery={setSearchQuery}
                       mode={mode}
                       setMode={setMode}
-                      type={type}
-                      setType={setType}
-                      beds={beds}
-                      setBeds={setBeds}
+                      availability={availability}
+                      setAvailability={setAvailability}
+                      currency={currency}
+                      setCurrency={setCurrency}
                       minPrice={minPrice}
                       setMinPrice={setMinPrice}
                       maxPrice={maxPrice}
                       setMaxPrice={setMaxPrice}
+                      minBeds={minBeds}
+                      setMinBeds={setMinBeds}
+                      maxBeds={maxBeds}
+                      setMaxBeds={setMaxBeds}
+                      minBaths={minBaths}
+                      setMinBaths={setMinBaths}
+                      minSqft={minSqft}
+                      setMinSqft={setMinSqft}
+                      minAcres={minAcres}
+                      setMinAcres={setMinAcres}
+                      selectedPropertyTypes={selectedPropertyTypes}
+                      setSelectedPropertyTypes={setSelectedPropertyTypes}
+                      selectedAccessibilityFeatures={selectedAccessibilityFeatures}
+                      setSelectedAccessibilityFeatures={setSelectedAccessibilityFeatures}
+                      selectedFeatures={selectedFeatures}
+                      setSelectedFeatures={setSelectedFeatures}
+                      onApplyFilters={onApplyFilters}
+                      onClearAllFilters={onClearAllFilters}
                     />
                     {/* The Property Grid would go here */}
                 </div>
