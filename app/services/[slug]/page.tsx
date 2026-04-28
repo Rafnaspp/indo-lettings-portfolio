@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useEffect } from 'react';
-import NavBars from '@/components/navBar';
+import GlassyNavBar from '@/components/glassyNavBar';
 import Footer from '@/components/footer';
 import { useParams } from 'next/navigation';
 import InfoTemplate from '@/components/info_template';
@@ -61,7 +61,7 @@ const SingleServicePage = () => {
   return (
     <>
     <div>
-    <NavBars/>
+    <GlassyNavBar/>
       <InfoTemplate 
         title={data.title}
         subtitle={data.subtitle}
@@ -103,3 +103,5 @@ const SingleServicePage = () => {
 };
 
 export default SingleServicePage;
+// DELETE THIS FILE AND THE [id] FOLDER. 
+// Next.js conflicts with the [slug] folder in the same directory.

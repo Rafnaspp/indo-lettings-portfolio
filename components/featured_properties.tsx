@@ -1,5 +1,6 @@
 import React from 'react';
-import { Bed, Bath, Move, Heart, Link } from 'lucide-react';
+import Link from 'next/link'; // Import Link from next/link
+import { Bed, Bath, Move, Heart } from 'lucide-react';
 import { featuredProperties } from '../data/properties';
 
 const FeaturedProperties = () => {
@@ -23,7 +24,7 @@ const FeaturedProperties = () => {
         {/* Grid Area */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {featuredProperties.map((prop) => (
-            <div key={prop.id} className="group cursor-pointer bg-white rounded-2xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-300">
+            <Link href={`/properties/${prop.id}`} key={prop.id} className="group cursor-pointer bg-white rounded-2xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-300">
               
               {/* Image Container */}
               <div className="relative h-64 overflow-hidden">
@@ -66,10 +67,10 @@ const FeaturedProperties = () => {
 
                 <div className="flex justify-between items-center">
                   <span className="text-2xl font-bold text-gray-900">{prop.price}</span>
-                  <button className="text-sm font-bold text-red-600 hover:underline">View Details</button>
+                  <span className="text-sm font-bold text-red-600 hover:underline">View Details</span>
                 </div>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
       </div>

@@ -5,7 +5,7 @@ import InfoTemplate from '@/components/info_template';
 import FAQSection from '@/components/FAQsection';
 import ServiceTiers from '@/components/service_tiers';
 import ValuationHero from '@/components/valuation_hero';
-import Navbar from '@/components/navBar';
+import GlassyNavBar from '@/components/glassyNavBar';
 import Footer from '@/components/footer';
 
 // Content Mapping for Landlord Requirements
@@ -81,7 +81,7 @@ const LandlordDynamicPage = () => {
   if (data.isValuation) {
     return (
       <>
-        <Navbar />
+        <GlassyNavBar />
         <div className="pt-20">
           <ValuationHero />
         </div>
@@ -93,7 +93,7 @@ const LandlordDynamicPage = () => {
   // 2. Standard Content Pages
   return (
     <>
-      <Navbar />
+      <GlassyNavBar />
       <InfoTemplate 
         title={data.title}
         subtitle={data.subtitle}

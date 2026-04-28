@@ -1,5 +1,6 @@
 import React from 'react';
 import { ShieldCheck } from 'lucide-react';
+import Link from 'next/link';
 
 const BookingSidebar = () => {
   return (
@@ -21,14 +22,13 @@ const BookingSidebar = () => {
           <label className="block text-xs font-bold text-gray-400 uppercase mb-2">Email Address</label>
           <input type="email" className="w-full p-4 bg-gray-50 border-none rounded-xl focus:ring-2 focus:ring-red-600/20" placeholder="john@example.com" />
         </div>
-        
+        <Link href="/contact">
         <button className="w-full bg-red-600 text-white py-4 rounded-xl font-bold text-lg hover:bg-red-700 transition-all shadow-lg shadow-red-200">
-          Request a Viewing
-        </button>
-
-        <button className="w-full bg-white text-gray-900 border-2 border-gray-100 py-4 rounded-xl font-bold hover:bg-gray-50 transition-all">
           Contact Agent
         </button>
+        </Link>
+
+        \
       </div>
 
       <div className="mt-8 pt-6 border-t border-gray-50 flex items-center gap-3 text-sm text-gray-500">

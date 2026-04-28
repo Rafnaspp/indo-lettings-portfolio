@@ -5,7 +5,7 @@ import InfoTemplate from '@/components/info_template';
 import FAQSection from '@/components/FAQsection';
 import ValuationHero from '@/components/valuation_hero';
 import MortgageCalculator from '@/components/mortgage_calculator';
-import Navbar from '@/components/navBar';
+import GlassyNavBar from '@/components/glassyNavBar';
 import Footer from '@/components/footer';
 import { Box, Camera, Zap, Award } from 'lucide-react';
 
@@ -64,12 +64,12 @@ const SellingDynamicPage = () => {
   if (!data) return <div className="pt-40 text-center uppercase tracking-widest text-gray-400">Page Coming Soon</div>;
 
   // Handle Full Page Components
-  if (data.isValuation) return <> <Navbar/> <ValuationHero /> <Footer/> </>;
-  if (data.isMortgage) return <> <Navbar/> <MortgageCalculator /> <Footer/> </>;
+  if (data.isValuation) return <> <GlassyNavBar/> <ValuationHero /> <Footer/> </>;
+  if (data.isMortgage) return <> <GlassyNavBar/> <MortgageCalculator /> <Footer/> </>;
 
   return (
     <>
-      <Navbar/>
+      <GlassyNavBar/>
       <InfoTemplate 
         title={data.title}
         subtitle={data.subtitle}

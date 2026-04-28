@@ -3,7 +3,7 @@ import React from 'react';
 import { useParams } from 'next/navigation';
 import InfoTemplate from '@/components/info_template';
 import MortgageCalculator from '@/components/mortgage_calculator';
-import Navbar from '@/components/navBar';
+import GlassyNavBar from '@/components/glassyNavBar';
 import Footer from '@/components/footer';
 import { Landmark, UserCheck, FileText, HelpCircle } from 'lucide-react';
 
@@ -49,7 +49,7 @@ const MortgageDynamicPage = () => {
   if (data.isCalculator) {
     return (
       <>
-        <Navbar />
+        <GlassyNavBar />
         <div className="pt-10">
           <MortgageCalculator />
         </div>
@@ -60,7 +60,7 @@ const MortgageDynamicPage = () => {
 
   return (
     <>
-      <Navbar />
+      <GlassyNavBar />
       <InfoTemplate 
         title={data.title}
         subtitle={data.subtitle}

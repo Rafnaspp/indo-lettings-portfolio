@@ -16,16 +16,11 @@ const ReadyToStart = () => {
 
         {/* CTA Buttons */}
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-          <Link 
-            href="/register" 
-            className="w-full sm:w-auto bg-red-600 text-white px-10 py-4 rounded-xl font-bold text-lg hover:bg-red-700 hover:shadow-lg hover:shadow-red-200 transition-all active:scale-95"
-          >
-            Get started
-          </Link>
+          
           
           <Link 
             href="/contact" 
-            className="w-full sm:w-auto bg-white text-gray-900 border-2 border-gray-200 px-10 py-4 rounded-xl font-bold text-lg hover:bg-gray-50 hover:border-gray-300 transition-all active:scale-95"
+            className="w-full sm:w-auto bg-red-600 text-white px-10 py-4 rounded-xl font-bold text-lg hover:bg-red-700 hover:shadow-lg hover:shadow-red-200 transition-all active:scale-95"
           >
             Contact us
           </Link>
