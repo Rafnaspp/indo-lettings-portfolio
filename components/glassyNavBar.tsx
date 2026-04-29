@@ -1,23 +1,20 @@
 "use client";
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
-import { Menu, X, ChevronDown } from 'lucide-react';
+import { Menu, X, ChevronDown, ChevronRight } from 'lucide-react';
 import { insights } from '../data/insights';
 import Image from 'next/image';
 
-const Navbar = () => {
+const GlassyNavBar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
+  const [activeMobileSection, setActiveMobileSection] = useState<string | null>(null);
 
-  useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 20);
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  const toggleMobileSection = (name: string) => {
+    setActiveMobileSection(activeMobileSection === name ? null : name);
+  };
 
   const navLinks = [
-    // ... (Your navLinks data remains exactly as you had it)
     { 
       name: 'Find a property', 
       href: '/properties', 
@@ -60,14 +57,14 @@ const Navbar = () => {
     },
     { 
       name: 'Sell or let', 
-      href: '/', 
+      href: '#', 
       isMega: true,
       description: "As local experts with global reach, we’ll help you find the right buyer or tenant for your property.",
       sections: [
         {
           title: "Explore our services",
           links: [
-            { name: 'Arrange a valuation', href: '/landlords/valuation' },
+            { name: 'Arrange a valuation', href: '/evaluation' },
             { name: 'Sell with us', href: '/selling/why-choose-us' },
             { name: 'Let with us', href: '/landlords/lettings-services' },
           ]
@@ -92,7 +89,7 @@ const Navbar = () => {
     },
     { 
       name: 'Our services', 
-      href: '/', 
+      href: '#', 
       isMega: true,
       description: "From property management to financial services, we offer a complete suite of solutions for all your real estate needs.",
       sections: [
@@ -110,7 +107,7 @@ const Navbar = () => {
     },
     { 
       name: 'Mortgages', 
-      href: '/', 
+      href: '#', 
       isMega: true,
       description: "Navigate the mortgage market with confidence. Our experts provide tools and advice to help you secure the best deal.",
       sections: [
@@ -128,14 +125,14 @@ const Navbar = () => {
     },
     { 
       name: 'About', 
-      href: '/', 
+      href: '#', 
       isMega: true,
       description: "Learn about IndoLettings, our commitment to excellence, and our dedicated team of property experts.",
       sections: [
         {
           title: "Company",
           links: [
-            { name: 'Contact Us', href: '/about/contact-us' },
+            { name: 'Contact Us', href: '/contact' },
             { name: 'Register requirements', href: '/about/register-requirements' },
             { name: 'Opening Hours', href: '/about/opening-hours' },
             { name: 'Urgent Maintenance', href: '/about/Maintenance' },
@@ -154,25 +151,13 @@ const Navbar = () => {
   ];
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50">
-      <div className={`transition-all flex justify-between items-center duration-300 ease-in-out mx-auto ${
-        isScrolled 
-          ? "max-w-7xl w-[94%] bg-white/40 backdrop-blur-md rounded-full shadow-lg py-1 px-8 mt-2" 
-          : "max-w-full w-full bg-transparent py-2 px-12"
-      }`}>
+    <nav className="absolute top-4 left-0 right-0 z-50">
+      <div className="max-w-7xl w-[92%] bg-white/60 backdrop-blur-xl rounded-full py-2 px-10 border border-white/20 mx-auto flex justify-between items-center">
         
-        {/* Logo Area - Increased size, minimal wrapper padding */}
-        <div className="flex-shrink-0 py-1">
+        {/* Logo */}
+        <div className="flex-shrink-0">
           <Link href="/">
-            <Image
-              src='/logo.png'
-              alt='Logo'
-              width={260} 
-              height={95}
-              className={`w-auto h-12 md:h-14 transition-all duration-300 ${
-                isScrolled ? "" : "brightness-0 invert"
-              }`}
-            />
+            <Image src='/logo.png' alt='Logo' width={110} height={40} className="w-auto" />
           </Link>
         </div>
 
@@ -182,18 +167,15 @@ const Navbar = () => {
             <div key={link.name} className="relative group">
               <Link 
                 href={link.href} 
-                className={`flex items-center text-sm font-bold transition-colors py-2 ${
-                  isScrolled ? "text-gray-900 hover:text-red-600" : "text-white hover:text-red-200"
-                }`}
+                className="flex items-center font-semibold text-sm transition-colors py-2 text-gray-900 hover:text-red-600"
               >
                 {link.name}
                 {link.isMega && <ChevronDown className="ml-1 w-4 h-4 opacity-70" />}
               </Link>
               
-              {/* Mega Menu - Positioning adjusted for reduced nav height */}
               {link.isMega && (
-                <div className="fixed left-0 right-0 mt-1 mx-auto max-w-7xl w-[95%] bg-white border border-gray-100 shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50 rounded-[30px] overflow-hidden p-10">
-                  <div className="grid grid-cols-12 gap-10">
+                <div className="fixed left-0 right-0 mt-2 mx-auto max-w-7xl w-[95%] bg-white border border-gray-100 shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50 rounded-[40px] overflow-hidden p-12">
+                  <div className="grid grid-cols-12 gap-10 p-4">
                     <div className="col-span-4 border-r border-gray-100 pr-10">
                       <h3 className="text-2xl font-bold text-gray-900 mb-4">{link.name}</h3>
                       <p className="text-sm text-gray-500 leading-relaxed">{link.description}</p>
@@ -201,28 +183,29 @@ const Navbar = () => {
                     <div className="col-span-8 grid grid-cols-3 gap-8">
                       {link.sections?.map((section) => (
                         section.isCTA ? (
-                          <div key={section.title} className="bg-gray-50 rounded-2xl p-6 flex flex-col justify-between border border-gray-100">
+                          <div key={section.title} className="bg-gray-50 rounded-3xl p-6 flex flex-col justify-between border border-gray-100">
                             <div>
                               <h4 className="text-[10px] font-black uppercase tracking-widest text-red-600 mb-2">{section.title}</h4>
-                              <p className="text-sm font-bold text-gray-900">Ready to move?</p>
+                              <p className="text-sm font-bold text-gray-900 mb-4">Ready to move?</p>
+                              <p className="text-xs text-gray-500 mb-6">Professional valuation from our local experts.</p>
                             </div>
-                            <Link href="/evaluation" className="w-full bg-red-600 text-white text-center py-2.5 rounded-xl text-xs font-bold hover:bg-red-700 transition-all shadow-md">
+                            <Link href="/evaluation" className="w-full bg-red-600 text-white text-center py-3 rounded-xl text-sm font-bold hover:bg-red-700 transition-all">
                               Book valuation
                             </Link>
                           </div>
                         ) : (
-                        <div key={section.title}>
-                          <h4 className="text-[10px] font-black uppercase tracking-widest text-red-600 mb-4">{section.title}</h4>
-                          <ul className="space-y-2">
-                            {section.links.map((item) => (
-                              <li key={item.name}>
-                                <Link href={item.href} className="text-xs font-semibold text-gray-600 hover:text-red-600 transition-colors">
-                                  {item.name}
-                                </Link>
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
+                          <div key={section.title}>
+                            <h4 className="text-[10px] font-black uppercase tracking-widest text-red-600 mb-4">{section.title}</h4>
+                            <ul className="space-y-3">
+                              {section.links.map((item) => (
+                                <li key={item.name}>
+                                  <Link href={item.href} className="text-sm font-semibold text-gray-600 hover:text-red-600 transition-colors">
+                                    {item.name}
+                                  </Link>
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
                         )
                       ))}
                     </div>
@@ -233,34 +216,70 @@ const Navbar = () => {
           ))}
         </div>
 
-        {/* Mobile Menu Button */}
+        {/* Mobile Toggle Button */}
         <div className="md:hidden flex items-center">
-          <button
-            onClick={() => setIsOpen(!isOpen)}
-            className={`transition-colors ${isScrolled ? "text-gray-900" : "text-white"}`}
-          >
-            {isOpen ? <X size={24} /> : <Menu size={24} />}
+          <button onClick={() => setIsOpen(!isOpen)} className="text-gray-900 p-2">
+            {isOpen ? <X size={28} /> : <Menu size={28} />}
           </button>
         </div>
       </div>
 
-      {/* Mobile Navigation Menu */}
+      {/* Mobile Navigation Menu Overlay */}
       {isOpen && (
-        <div className="md:hidden bg-white fixed inset-0 z-50 overflow-y-auto p-6">
-          <div className="flex justify-between items-center mb-8">
-            <Image src="/logo.png" width={180} height={65} alt="Logo" />
-            <button onClick={() => setIsOpen(false)} className="text-gray-900"><X size={28}/></button>
+        <div className="md:hidden fixed inset-0 bg-white z-[60] flex flex-col">
+          <div className="flex justify-between items-center p-6 border-b">
+            <Image src="/logo.png" width={110} height={40} className="w-auto" alt="Logo" />
+            <button onClick={() => setIsOpen(false)} className="text-gray-900">
+              <X size={32}/>
+            </button>
           </div>
-          {/* ... Rest of mobile menu remains same */}
-          <div className="space-y-6">
+
+          <div className="flex-1 overflow-y-auto p-6 space-y-4">
             {navLinks.map((link) => (
-              <div key={link.name}>
-                <p className="text-xs font-black text-red-600 uppercase tracking-widest mb-3">{link.name}</p>
-                <div className="grid grid-cols-2 gap-2 pl-2">
-                  {link.sections?.flatMap(s => s.links).map((item) => (
-                    <Link key={item.name} href={item.href} onClick={() => setIsOpen(false)} className="text-sm font-bold text-gray-800">{item.name}</Link>
-                  ))}
-                </div>
+              <div key={link.name} className="border-b border-gray-100 pb-4">
+                <button 
+                  onClick={() => toggleMobileSection(link.name)}
+                  className="w-full flex justify-between items-center text-lg font-bold text-gray-900"
+                >
+                  {link.name}
+                  {link.isMega && (
+                    <ChevronRight className={`transition-transform duration-200 ${activeMobileSection === link.name ? 'rotate-90' : ''}`} />
+                  )}
+                </button>
+
+                {/* Sub-menu for Mobile */}
+                {activeMobileSection === link.name && link.isMega && (
+                  <div className="mt-4 space-y-6 pl-2 animate-in slide-in-from-top-2 duration-200">
+                    {link.sections.map((section) => (
+                      <div key={section.title}>
+                        <h4 className="text-[10px] font-black text-red-600 uppercase tracking-widest mb-3">
+                          {section.title}
+                        </h4>
+                        <div className="space-y-3">
+                          {section.links.map((item) => (
+                            <Link 
+                              key={item.name} 
+                              href={item.href} 
+                              onClick={() => setIsOpen(false)}
+                              className="block text-sm font-semibold text-gray-700"
+                            >
+                              {item.name}
+                            </Link>
+                          ))}
+                          {section.isCTA && (
+                             <Link 
+                               href="/evaluation" 
+                               onClick={() => setIsOpen(false)}
+                               className="block w-full bg-red-600 text-white text-center py-3 rounded-xl font-bold"
+                             >
+                               Book Free Valuation
+                             </Link>
+                          )}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
               </div>
             ))}
           </div>
@@ -270,4 +289,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+export default GlassyNavBar;

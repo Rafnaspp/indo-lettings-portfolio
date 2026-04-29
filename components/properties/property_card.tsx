@@ -6,11 +6,11 @@ interface PropertyProps {
   property: {
     id: number | string;
     title: string;
-    location: string;
+    location?: string;
     price: number | string;
     beds: number | string;
-    baths: number;
-    sqft: number;
+    baths: number | string;
+    sqft: number | string;
     tag?: string;
     image: string;
     mode?: 'rent' | 'buy';
@@ -68,10 +68,12 @@ const PropertyCard = ({ property }: PropertyProps) => {
           </h3>
         </div>
 
-        <div className="flex items-center gap-1 text-gray-500 text-sm mb-6">
-          <MapPin size={14} className="text-red-500" />
-          {property.location}
-        </div>
+        {property.location && (
+          <div className="flex items-center gap-1 text-gray-500 text-sm mb-6">
+            <MapPin size={14} className="text-red-500" />
+            {property.location}
+          </div>
+        )}
 
         {/* Specs Grid */}
         <div className="grid grid-cols-3 gap-4 py-4 border-t border-gray-50">

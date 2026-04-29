@@ -1,5 +1,6 @@
 import React from 'react';
-import { Bed, Bath, Move, Heart, Link } from 'lucide-react';
+import Link from 'next/link'; // Import Link from next/link
+import { Bed, Bath, Move, Heart } from 'lucide-react';
 import { featuredProperties } from '../data/properties';
 
 const FeaturedProperties = () => {
@@ -13,17 +14,15 @@ const FeaturedProperties = () => {
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900">Featured Properties</h2>
             <p className="text-gray-500 mt-2">Explore our hand-picked selection of premium listings.</p>
           </div>
-          <a href="/properties" >
-          <button className="hidden md:block text-red-600 font-semibold border-b-2 border-red-600 hover:text-red-700 transition-colors">
+          <Link href="/properties" className="hidden md:block text-red-600 font-semibold border-b-2 border-red-600 hover:text-red-700 transition-colors">
             View All Properties
-          </button>
-          </a>
+          </Link>
         </div>
 
         {/* Grid Area */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {featuredProperties.map((prop) => (
-            <div key={prop.id} className="group cursor-pointer bg-white rounded-2xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-300">
+            <Link href={`/properties/${prop.id}`} key={prop.id} className="group cursor-pointer bg-white rounded-2xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-300">
               
               {/* Image Container */}
               <div className="relative h-64 overflow-hidden">
@@ -39,9 +38,9 @@ const FeaturedProperties = () => {
                     {prop.status}
                   </span>
                 </div>
-                <button className="absolute top-4 right-4 p-2 bg-white/20 backdrop-blur-md rounded-full text-white hover:bg-white hover:text-red-600 transition-all">
+                <div className="absolute top-4 right-4 p-2 bg-white/20 backdrop-blur-md rounded-full text-white hover:bg-white hover:text-red-600 transition-all">
                   <Heart size={20} />
-                </button>
+                </div>
               </div>
 
               {/* Content Area */}
@@ -66,10 +65,10 @@ const FeaturedProperties = () => {
 
                 <div className="flex justify-between items-center">
                   <span className="text-2xl font-bold text-gray-900">{prop.price}</span>
-                  <button className="text-sm font-bold text-red-600 hover:underline">View Details</button>
+                  <span className="text-sm font-bold text-red-600 hover:underline">View Details</span>
                 </div>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
       </div>
