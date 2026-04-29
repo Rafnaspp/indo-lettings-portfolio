@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import GlassyNavBar from '@/components/glassyNavBar';
 import Footer from '@/components/footer';
-import { CheckCircle2, ArrowRight } from 'lucide-react';
+import { CheckCircle2, ArrowRight, MapPin, Mail, Phone } from 'lucide-react';
 
 const GOOGLE_SHEET_WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbyMl23_5zeMD6hvqmB05s3wwQdmitgvpe8q05NgC2gCggX8RlmeFDtEjrAx0URsDu5X7g/exec"; // Placeholder
 
@@ -63,15 +63,74 @@ const ContactPage = () => {
   return (
     <>
       <GlassyNavBar />
-      <main className="pt-32 pb-24 bg-gray-50">
-        <div className="max-w-4xl mx-auto px-4">
-          <div className="bg-white rounded-[40px] shadow-xl shadow-gray-200/50 overflow-hidden border border-gray-100">
-            <div className="p-8 md:p-12 border-b border-gray-50">
-              <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Contact Us</h1>
-              <p className="text-gray-500">Have a question or need assistance? Send us a message and we'll be happy to help.</p>
+      <main className="pt-40 pb-24 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+            
+            {/* Left Side: Contact Information */}
+            <div className="lg:col-span-4 space-y-8 lg:sticky lg:top-32">
+              <div className="space-y-4">
+                <h1 className="text-4xl md:text-5xl font-bold text-gray-900 leading-tight">
+                  Get in touch <br/>with <span className="text-red-600">us.</span>
+                </h1>
+                <p className="text-gray-500 text-lg">
+                  We're here to help with all your property inquiries. Reach out via the form or through our contact details.
+                </p>
+              </div>
+
+              <div className="space-y-4">
+                <a 
+                  href="https://www.google.com/maps?sca_esv=a2a26c5991e8083d&output=search&q=Unit+6,+234+-+236,+whitechapel+rd,+London+E1+1BJ&source=lnms&fbs=ADc_l-aN0CWEZBOHjofHoaMMDiKpUrv6YeyJhXfuYqj4Fj6c1QD8TCIDJfGa0vqjN9IHrvHWDsmeORdhBsKKB7YhOFCEnujh40JoXm8mJ1XD2aOLFzvCDdiRYHZvxPRlffyPQahEFPoq7neR61oywFMHCxrccH2HyEryNALG8VWSO5q_B5Xta3xaljfDjjTlFoPNszmmQ_2mqLWaOuE2eIpGVb1Enor5gQ&entry=mc&ved=1t:200715&ictx=111" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="flex items-start gap-4 p-6 bg-white rounded-3xl border border-gray-100 hover:border-red-100 transition-all group"
+                >
+                  <div className="p-3 bg-red-50 text-red-600 rounded-2xl group-hover:bg-red-600 group-hover:text-white transition-colors">
+                    <MapPin size={24} />
+                  </div>
+                  <div>
+                    <h3 className="font-bold text-gray-900">Our Office</h3>
+                    <p className="text-sm text-gray-500 leading-relaxed">Unit 6, 234 - 236, Whitechapel Rd, London E1 1BJ</p>
+                  </div>
+                </a>
+
+                <a 
+                  href="mailto:info@indolettings.co.uk" 
+                  className="flex items-start gap-4 p-6 bg-white rounded-3xl border border-gray-100 hover:border-red-100 transition-all group"
+                >
+                  <div className="p-3 bg-red-50 text-red-600 rounded-2xl group-hover:bg-red-600 group-hover:text-white transition-colors">
+                    <Mail size={24} />
+                  </div>
+                  <div>
+                    <h3 className="font-bold text-gray-900">Email Address</h3>
+                    <p className="text-sm text-gray-500">info@indolettings.co.uk</p>
+                  </div>
+                </a>
+
+                <a 
+                  href="tel:02078707966" 
+                  className="flex items-start gap-4 p-6 bg-white rounded-3xl border border-gray-100 hover:border-red-100 transition-all group"
+                >
+                  <div className="p-3 bg-red-50 text-red-600 rounded-2xl group-hover:bg-red-600 group-hover:text-white transition-colors">
+                    <Phone size={24} />
+                  </div>
+                  <div>
+                    <h3 className="font-bold text-gray-900">Phone Number</h3>
+                    <p className="text-sm text-gray-500">0207 870 7966</p>
+                  </div>
+                </a>
+              </div>
             </div>
 
-            <form onSubmit={handleSubmit} className="p-8 md:p-12 space-y-10">
+            {/* Right Side: Form */}
+            <div className="lg:col-span-8">
+              <div className="bg-white rounded-[40px] shadow-xl shadow-gray-200/50 overflow-hidden border border-gray-100">
+                <div className="p-8 md:p-12 border-b border-gray-50">
+                  <h2 className="text-2xl font-bold text-gray-900 mb-2">Send us a message</h2>
+                  <p className="text-gray-500">Fill out the form below and we'll get back to you within 24 hours.</p>
+                </div>
+
+                <form onSubmit={handleSubmit} className="p-8 md:p-12 space-y-10">
               {/* Personal Details */}
               <div className="space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -137,6 +196,8 @@ const ContactPage = () => {
                 </p>
               </div>
             </form>
+              </div>
+            </div>
           </div>
         </div>
       </main>

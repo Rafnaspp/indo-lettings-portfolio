@@ -2,11 +2,17 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { Menu, X, ChevronDown } from 'lucide-react';
+import { Menu, X, ChevronDown, ChevronRight } from 'lucide-react';
 import { insights } from '../data/insights';
+import Image from 'next/image';
 
 const GlassyNavBar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [activeMobileSection, setActiveMobileSection] = useState<string | null>(null);
+
+  const toggleMobileSection = (name: string) => {
+    setActiveMobileSection(activeMobileSection === name ? null : name);
+  };
 
   const navLinks = [
     { 
@@ -145,21 +151,23 @@ const GlassyNavBar = () => {
   ];
 
   return (
-    <nav className="fixed top-4 left-0 right-0 z-50">
-      <div className="max-w-7xl w-[92%] bg-white/60 backdrop-blur-xl rounded-full shadow-lg py-3 px-10 border border-white/20 mx-auto flex justify-between items-center">
+    <nav className="absolute top-4 left-0 right-0 z-50">
+      <div className="max-w-7xl w-[92%] bg-white/60 backdrop-blur-xl rounded-full py-2 px-10 border border-white/20 mx-auto flex justify-between items-center">
         
+        {/* Logo */}
         <div className="flex-shrink-0">
           <Link href="/">
-            <img src="/logo.png" alt="Logo" className="h-12 w-auto" />
+            <Image src='/logo.png' alt='Logo' width={110} height={40} className="w-auto" />
           </Link>
         </div>
 
+        {/* Desktop Navigation */}
         <div className="hidden md:flex items-center space-x-8">
           {navLinks.map((link) => (
             <div key={link.name} className="relative group">
               <Link 
                 href={link.href} 
-                className="flex items-center font-medium transition-colors py-2 text-gray-900 hover:text-red-600"
+                className="flex items-center font-semibold text-sm transition-colors py-2 text-gray-900 hover:text-red-600"
               >
                 {link.name}
                 {link.isMega && <ChevronDown className="ml-1 w-4 h-4 opacity-70" />}
@@ -179,25 +187,25 @@ const GlassyNavBar = () => {
                             <div>
                               <h4 className="text-[10px] font-black uppercase tracking-widest text-red-600 mb-2">{section.title}</h4>
                               <p className="text-sm font-bold text-gray-900 mb-4">Ready to move?</p>
-                              <p className="text-xs text-gray-500 mb-6">Get a professional valuation from our local experts.</p>
+                              <p className="text-xs text-gray-500 mb-6">Professional valuation from our local experts.</p>
                             </div>
-                            <Link href="/evaluation" className="w-full bg-red-600 text-white text-center py-3 rounded-xl text-sm font-bold hover:bg-red-700 transition-all shadow-lg shadow-red-100">
-                              Book your free valuation
+                            <Link href="/evaluation" className="w-full bg-red-600 text-white text-center py-3 rounded-xl text-sm font-bold hover:bg-red-700 transition-all">
+                              Book valuation
                             </Link>
                           </div>
                         ) : (
-                        <div key={section.title}>
-                          <h4 className="text-[10px] font-black uppercase tracking-widest text-red-600 mb-4">{section.title}</h4>
-                          <ul className="space-y-3">
-                            {section.links.map((item) => (
-                              <li key={item.name}>
-                                <Link href={item.href} className="text-sm font-semibold text-gray-600 hover:text-red-600 transition-colors">
-                                  {item.name}
-                                </Link>
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
+                          <div key={section.title}>
+                            <h4 className="text-[10px] font-black uppercase tracking-widest text-red-600 mb-4">{section.title}</h4>
+                            <ul className="space-y-3">
+                              {section.links.map((item) => (
+                                <li key={item.name}>
+                                  <Link href={item.href} className="text-sm font-semibold text-gray-600 hover:text-red-600 transition-colors">
+                                    {item.name}
+                                  </Link>
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
                         )
                       ))}
                     </div>
@@ -208,21 +216,72 @@ const GlassyNavBar = () => {
           ))}
         </div>
 
+        {/* Mobile Toggle Button */}
         <div className="md:hidden flex items-center">
-          <button onClick={() => setIsOpen(!isOpen)} className="text-gray-900">
+          <button onClick={() => setIsOpen(!isOpen)} className="text-gray-900 p-2">
             {isOpen ? <X size={28} /> : <Menu size={28} />}
           </button>
         </div>
       </div>
 
+      {/* Mobile Navigation Menu Overlay */}
       {isOpen && (
-        <div className="md:hidden bg-white fixed inset-0 top-0 z-50 overflow-y-auto p-6">
-          <div className="flex justify-between items-center mb-8">
-            <img src="/logo.png" className="h-10 w-auto" alt="Logo" />
-            <button onClick={() => setIsOpen(false)} className="text-gray-900"><X size={32}/></button>
+        <div className="md:hidden fixed inset-0 bg-white z-[60] flex flex-col">
+          <div className="flex justify-between items-center p-6 border-b">
+            <Image src="/logo.png" width={110} height={40} className="w-auto" alt="Logo" />
+            <button onClick={() => setIsOpen(false)} className="text-gray-900">
+              <X size={32}/>
+            </button>
           </div>
-          <div className="space-y-6">
-            {/* Mobile links logic... */}
+
+          <div className="flex-1 overflow-y-auto p-6 space-y-4">
+            {navLinks.map((link) => (
+              <div key={link.name} className="border-b border-gray-100 pb-4">
+                <button 
+                  onClick={() => toggleMobileSection(link.name)}
+                  className="w-full flex justify-between items-center text-lg font-bold text-gray-900"
+                >
+                  {link.name}
+                  {link.isMega && (
+                    <ChevronRight className={`transition-transform duration-200 ${activeMobileSection === link.name ? 'rotate-90' : ''}`} />
+                  )}
+                </button>
+
+                {/* Sub-menu for Mobile */}
+                {activeMobileSection === link.name && link.isMega && (
+                  <div className="mt-4 space-y-6 pl-2 animate-in slide-in-from-top-2 duration-200">
+                    {link.sections.map((section) => (
+                      <div key={section.title}>
+                        <h4 className="text-[10px] font-black text-red-600 uppercase tracking-widest mb-3">
+                          {section.title}
+                        </h4>
+                        <div className="space-y-3">
+                          {section.links.map((item) => (
+                            <Link 
+                              key={item.name} 
+                              href={item.href} 
+                              onClick={() => setIsOpen(false)}
+                              className="block text-sm font-semibold text-gray-700"
+                            >
+                              {item.name}
+                            </Link>
+                          ))}
+                          {section.isCTA && (
+                             <Link 
+                               href="/evaluation" 
+                               onClick={() => setIsOpen(false)}
+                               className="block w-full bg-red-600 text-white text-center py-3 rounded-xl font-bold"
+                             >
+                               Book Free Valuation
+                             </Link>
+                          )}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+            ))}
           </div>
         </div>
       )}

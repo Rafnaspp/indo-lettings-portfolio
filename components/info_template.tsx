@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import React from 'react';
 
 interface InfoTemplateProps {
@@ -36,9 +37,11 @@ const InfoTemplate = ({ title, subtitle, content, sidebar }: InfoTemplateProps) 
                   <p className="text-red-100 mb-6 text-sm">
                     Speak to our team today for tailored property solutions.
                   </p>
+                  <Link href='/contact'>
                   <button className="w-full py-4 bg-white text-red-600 rounded-xl font-bold hover:bg-red-50 transition-colors">
                     Contact an Advisor
                   </button>
+                  </Link>
                 </div>
               )}
             </div>

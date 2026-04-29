@@ -6,6 +6,7 @@ import MortgageCalculator from '@/components/mortgage_calculator';
 import GlassyNavBar from '@/components/glassyNavBar';
 import Footer from '@/components/footer';
 import { Landmark, UserCheck, FileText, HelpCircle } from 'lucide-react';
+import Link from 'next/link';
 
 const mortgageContent: any = {
   'working': {
@@ -87,9 +88,11 @@ const MortgageDynamicPage = () => {
                     )}
 
                     {slug === 'advisor' && (
+                      <Link href='/contact'>
                         <button className="bg-gray-900 text-white px-10 py-4 rounded-2xl font-bold hover:bg-red-600 transition-all">
                             Book a Free Consultation
                         </button>
+                        </Link>
                     )}
                 </div>
             </div>

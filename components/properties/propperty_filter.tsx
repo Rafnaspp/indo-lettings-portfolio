@@ -113,7 +113,7 @@ const PropertyFilter: React.FC<FilterProps> = ({
         {/* Advanced Filters Button */}
         <button 
           onClick={() => setIsModalOpen(true)}
-          className="flex items-center justify-center gap-2 px-5 py-3 bg-gray-900 text-white rounded-xl text-sm font-bold hover:bg-gray-800 transition-all shrink-0 w-32 md:w-40"
+          className="flex items-center justify-center gap-2 px-8 py-3 bg-gray-900 text-white rounded-xl text-sm font-bold hover:bg-gray-800 transition-all shrink-0 w-32 md:w-40"
         >
           <SlidersHorizontal size={18} />
           <span className="inline">Filters</span>

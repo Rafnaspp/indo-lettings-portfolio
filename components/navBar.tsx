@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Menu, X, ChevronDown } from 'lucide-react';
 import { insights } from '../data/insights';
+import Image from 'next/image';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -16,6 +17,7 @@ const Navbar = () => {
   }, []);
 
   const navLinks = [
+    // ... (Your navLinks data remains exactly as you had it)
     { 
       name: 'Find a property', 
       href: '/properties', 
@@ -152,32 +154,35 @@ const Navbar = () => {
   ];
 
   return (
-    <nav className={`fixed mt-4 left-0 right-0 z-50 transition-all duration-500 ease-in-out ${isScrolled ? "top-4" : "top-0"}`}>
-      {/* Main Container - justify-between only works if Logo, Nav, and Button are direct children */}
+    <nav className="fixed top-0 left-0 right-0 z-50">
       <div className={`transition-all flex justify-between items-center duration-300 ease-in-out mx-auto ${
         isScrolled 
-          ? "max-w-7xl w-[92%] bg-white/20 backdrop-blur-sm rounded-full shadow-md py-3 px-10" 
-          : "max-w-7xl w-full bg-transparent py-6 px-20"
+          ? "max-w-7xl w-[94%] bg-white/40 backdrop-blur-md rounded-full shadow-lg py-1 px-8 mt-2" 
+          : "max-w-full w-full bg-transparent py-2 px-12"
       }`}>
         
-        {/* 1. Logo Area */}
-        <div className="flex-shrink-0">
+        {/* Logo Area - Increased size, minimal wrapper padding */}
+        <div className="flex-shrink-0 py-1">
           <Link href="/">
-            <img
-              src="/logo.png"
-              alt="Logo"
-              className={`h-12 w-auto transition-all duration-300 ${isScrolled ? "" : "brightness-0 invert"}`}
+            <Image
+              src='/logo.png'
+              alt='Logo'
+              width={260} 
+              height={95}
+              className={`w-auto h-12 md:h-14 transition-all duration-300 ${
+                isScrolled ? "" : "brightness-0 invert"
+              }`}
             />
           </Link>
         </div>
 
-        {/* 2. Desktop Navigation Links - Centered or spaced */}
+        {/* Desktop Navigation */}
         <div className="hidden md:flex items-center space-x-8">
           {navLinks.map((link) => (
             <div key={link.name} className="relative group">
               <Link 
                 href={link.href} 
-                className={`flex items-center font-medium transition-colors py-2 ${
+                className={`flex items-center text-sm font-bold transition-colors py-2 ${
                   isScrolled ? "text-gray-900 hover:text-red-600" : "text-white hover:text-red-200"
                 }`}
               >
@@ -185,9 +190,10 @@ const Navbar = () => {
                 {link.isMega && <ChevronDown className="ml-1 w-4 h-4 opacity-70" />}
               </Link>
               
+              {/* Mega Menu - Positioning adjusted for reduced nav height */}
               {link.isMega && (
-                <div className="fixed left-0 right-0 mt-2 mx-auto max-w-7xl w-[95%] bg-white border border-gray-100 shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50 rounded-[40px] overflow-hidden p-12">
-                  <div className="grid grid-cols-12 gap-10 p-4">
+                <div className="fixed left-0 right-0 mt-1 mx-auto max-w-7xl w-[95%] bg-white border border-gray-100 shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50 rounded-[30px] overflow-hidden p-10">
+                  <div className="grid grid-cols-12 gap-10">
                     <div className="col-span-4 border-r border-gray-100 pr-10">
                       <h3 className="text-2xl font-bold text-gray-900 mb-4">{link.name}</h3>
                       <p className="text-sm text-gray-500 leading-relaxed">{link.description}</p>
@@ -195,23 +201,22 @@ const Navbar = () => {
                     <div className="col-span-8 grid grid-cols-3 gap-8">
                       {link.sections?.map((section) => (
                         section.isCTA ? (
-                          <div key={section.title} className="bg-gray-50 rounded-3xl p-6 flex flex-col justify-between border border-gray-100">
+                          <div key={section.title} className="bg-gray-50 rounded-2xl p-6 flex flex-col justify-between border border-gray-100">
                             <div>
                               <h4 className="text-[10px] font-black uppercase tracking-widest text-red-600 mb-2">{section.title}</h4>
-                              <p className="text-sm font-bold text-gray-900 mb-4">Ready to move?</p>
-                              <p className="text-xs text-gray-500 mb-6">Get a professional valuation from our local experts.</p>
+                              <p className="text-sm font-bold text-gray-900">Ready to move?</p>
                             </div>
-                            <Link href="/evaluation" className="w-full bg-red-600 text-white text-center py-3 rounded-xl text-sm font-bold hover:bg-red-700 transition-all shadow-lg shadow-red-100">
-                              Book your free valuation
+                            <Link href="/evaluation" className="w-full bg-red-600 text-white text-center py-2.5 rounded-xl text-xs font-bold hover:bg-red-700 transition-all shadow-md">
+                              Book valuation
                             </Link>
                           </div>
                         ) : (
                         <div key={section.title}>
                           <h4 className="text-[10px] font-black uppercase tracking-widest text-red-600 mb-4">{section.title}</h4>
-                          <ul className="space-y-3">
+                          <ul className="space-y-2">
                             {section.links.map((item) => (
                               <li key={item.name}>
-                                <Link href={item.href} className="text-sm font-semibold text-gray-600 hover:text-red-600 transition-colors">
+                                <Link href={item.href} className="text-xs font-semibold text-gray-600 hover:text-red-600 transition-colors">
                                   {item.name}
                                 </Link>
                               </li>
@@ -228,57 +233,36 @@ const Navbar = () => {
           ))}
         </div>
 
-        {/* 3. Action Button - Pushed to the right */}
-        {/* <div className="hidden md:block">
-          <button className={`px-6 py-2.5 rounded-full font-bold transition-all duration-300 ${
-            isScrolled 
-              ? "bg-red-600 text-white hover:bg-red-700 shadow-md" 
-              : "bg-white text-gray-900 hover:bg-gray-100"
-          }`}>
-            Register
-          </button>
-        </div> */}
-
         {/* Mobile Menu Button */}
         <div className="md:hidden flex items-center">
           <button
             onClick={() => setIsOpen(!isOpen)}
             className={`transition-colors ${isScrolled ? "text-gray-900" : "text-white"}`}
           >
-            {isOpen ? <X size={28} /> : <Menu size={28} />}
+            {isOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
         </div>
       </div>
 
       {/* Mobile Navigation Menu */}
       {isOpen && (
-        <div className="md:hidden bg-white fixed inset-0 top-0 z- overflow-y-auto">
-          <div className="p-6">
-            <div className="flex justify-between items-center mb-8">
-              <img src="/logo.png" className="h-10 w-auto" alt="Logo" />
-              <button onClick={() => setIsOpen(false)} className="text-gray-900"><X size={32}/></button>
-            </div>
-            <div className="space-y-6">
-              {navLinks.map((link) => (
-                <div key={link.name}>
-                  <p className="text-xs font-black text-red-600 uppercase tracking-widest mb-3">{link.name}</p>
-                  {link.isMega && (
-                    <div className="space-y-4 pl-2">
-                      {link.sections?.map((section) => (
-                        <div key={section.title} className="space-y-2">
-                          <h5 className="text-[10px] font-bold text-gray-400 uppercase">{section.title}</h5>
-                          <div className="grid grid-cols-2 gap-2">
-                            {section.links.map((item) => (
-                              <Link key={item.name} href={item.href} onClick={() => setIsOpen(false)} className="text-sm font-bold text-gray-800">{item.name}</Link>
-                            ))}
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  )}
+        <div className="md:hidden bg-white fixed inset-0 z-50 overflow-y-auto p-6">
+          <div className="flex justify-between items-center mb-8">
+            <Image src="/logo.png" width={180} height={65} alt="Logo" />
+            <button onClick={() => setIsOpen(false)} className="text-gray-900"><X size={28}/></button>
+          </div>
+          {/* ... Rest of mobile menu remains same */}
+          <div className="space-y-6">
+            {navLinks.map((link) => (
+              <div key={link.name}>
+                <p className="text-xs font-black text-red-600 uppercase tracking-widest mb-3">{link.name}</p>
+                <div className="grid grid-cols-2 gap-2 pl-2">
+                  {link.sections?.flatMap(s => s.links).map((item) => (
+                    <Link key={item.name} href={item.href} onClick={() => setIsOpen(false)} className="text-sm font-bold text-gray-800">{item.name}</Link>
+                  ))}
                 </div>
-              ))}
-            </div>
+              </div>
+            ))}
           </div>
         </div>
       )}
