@@ -115,7 +115,7 @@ const PropertyDetailPage = () => {
               price={property.price} 
               mode={property.mode}
               title={property.title}
-              address={property.location || property.address}
+              address={(property.location || property.address)??''}
             />
           </div>
 
