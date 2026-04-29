@@ -54,7 +54,7 @@ const PropertyCard = ({ property }: PropertyProps) => {
         {/* Price Overlay */}
         <div className="absolute bottom-4 left-4">
           <div className="bg-red-600 text-white px-4 py-2 rounded-xl font-bold shadow-lg">
-            £{Number(property.price).toLocaleString()}
+            £{typeof property.price === 'number' ? property.price.toLocaleString() : Number(String(property.price).replace(/[^0-9.]+/g, "")).toLocaleString()}
             {property.mode === 'rent' && <span className="text-xs font-normal opacity-80"> / mo</span>}
           </div>
         </div>

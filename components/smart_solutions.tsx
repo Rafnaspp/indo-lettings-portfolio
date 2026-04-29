@@ -1,5 +1,6 @@
 import React from 'react';
-import { smartSolutions } from '../data/solutions';
+import Link from 'next/link';
+import { smartSolutions, Solution } from '../data/solutions';
 
 const SmartSolutions = () => {
   return (
@@ -20,7 +21,7 @@ const SmartSolutions = () => {
 
         {/* Solutions Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {smartSolutions.map((solution, index) => (
+          {smartSolutions.map((solution: Solution, index: number) => (
             <div 
               key={index} 
               className="bg-white p-10 rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow group text-center"
@@ -42,9 +43,12 @@ const SmartSolutions = () => {
               </p>
 
               {/* Call to Action Link */}
-              <button className="text-red-600 font-bold text-sm uppercase tracking-wider hover:text-red-700 transition-colors">
-                Learn More →
-              </button>
+              <Link 
+                href={`/solutions/${solution.slug}`}
+                className="text-red-600 font-bold text-sm uppercase tracking-wider hover:text-red-700 transition-colors inline-block"
+              >
+                Learn More &rarr;
+              </Link>
             </div>
           ))}
         </div>

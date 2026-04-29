@@ -152,12 +152,12 @@ const GlassyNavBar = () => {
 
   return (
     <nav className="absolute top-4 left-0 right-0 z-50">
-      <div className="max-w-7xl w-[92%] bg-white/60 backdrop-blur-xl rounded-full py-2 px-10 border border-white/20 mx-auto flex justify-between items-center">
+      <div className="w-[96%] bg-white/60 backdrop-blur-xl rounded-full py-2 px-12 border border-white/20 mx-auto flex justify-between items-center">
         
         {/* Logo */}
         <div className="flex-shrink-0">
           <Link href="/">
-            <Image src='/logo.png' alt='Logo' width={110} height={40} className="w-auto" />
+            <Image src='/logo.png' alt='Logo' width={150} height={70} className="w-auto" />
           </Link>
         </div>
 
