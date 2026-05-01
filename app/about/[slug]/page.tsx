@@ -5,9 +5,11 @@ import { useParams } from 'next/navigation';
 import InfoTemplate from '@/components/info_template';
 import TeamSection from '@/components/TeamSection';
 import ContactPage from '@/app/contact/page'; // Reusing the high-end contact layout
-import Navbar from '@/components/navBar';
+import GlassyNavBar from '@/components/glassyNavBar';
 import Footer from '@/components/footer';
+import Link from 'next/link';
 import { Clock, Shield, Hammer, ClipboardList, MessageSquare } from 'lucide-react';
+import { insights } from '@/data/insights';
 
 const aboutContent: any = {
   'contact-us': { isContact: true },
@@ -61,11 +63,11 @@ const AboutDynamicPage = () => {
   if (!data) return <div className="pt-40 text-center text-gray-400 uppercase tracking-widest">Section Coming Soon</div>;
 
   // 1. Direct Page Overrides
-  if (data.isContact) return <><Navbar/><ContactPage/><Footer/></>;
+  if (data.isContact) return <><GlassyNavBar/><ContactPage/><Footer/></>;
 
   return (
     <>
-      <Navbar />
+      <GlassyNavBar />
       <InfoTemplate 
         title={data.title}
         subtitle={data.subtitle}
@@ -103,14 +105,15 @@ const AboutDynamicPage = () => {
             {/* Blog Placeholder */}
             {data.isBlog && (
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                {[1, 2].map((i) => (
-                  <div key={i} className="group cursor-pointer">
+                {insights.map((post) => (
+                  <Link key={post.id} href={post.link} className="group cursor-pointer">
                     <div className="aspect-video bg-gray-100 rounded-3xl mb-4 overflow-hidden">
-                        <div className="w-full h-full bg-gray-200 group-hover:scale-105 transition-transform duration-500" />
+                        <img src={post.image} alt={post.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                     </div>
-                    <h4 className="text-xl font-bold group-hover:text-red-600 transition-colors">Market Update: London Property Trends 2026</h4>
+                    <span className="text-[10px] font-bold text-red-600 uppercase tracking-widest">{post.category}</span>
+                    <h4 className="text-xl font-bold group-hover:text-red-600 transition-colors mt-1">{post.title}</h4>
                     <p className="text-sm text-gray-500 mt-2">Read more →</p>
-                  </div>
+                  </Link>
                 ))}
               </div>
             )}

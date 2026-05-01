@@ -1,13 +1,27 @@
 export interface Property {
   id: string;
   title: string;
-  address: string;
+  address?: string;
+  location?: string;
   price: string;
-  beds: number;
+  beds: number | string;
   baths: number;
   sqft: number;
-  image: string;
-  status: 'New' | 'Reduced' | 'Hot';
+  image: string; // Keep this for the main thumbnail
+  images: {
+    main: string;
+    kitchen: string;
+    balcony: string;
+    bedroom: string;
+    bathroom: string;
+  };
+  status: string;
+  type?: string;
+  mode?: 'buy' | 'rent';
+  description?: string;
+  propertyType?: string;
+  features?: string[];
+  landAcres?: number;
 }
 
 export const featuredProperties: Property[] = [
@@ -20,6 +34,13 @@ export const featuredProperties: Property[] = [
     baths: 3,
     sqft: 2400,
     image: '/properties/prop1.png',
+    images: {
+      main: '/properties/prop1.png',
+      kitchen: '/properties/prop2.png',
+      balcony: '/properties/prop3.png',
+      bedroom: '/properties/prop1.png',
+      bathroom: '/properties/prop2.png',
+    },
     status: 'New',
   },
   {
@@ -31,6 +52,13 @@ export const featuredProperties: Property[] = [
     baths: 2,
     sqft: 1100,
     image: '/properties/prop2.png',
+    images: {
+      main: '/properties/prop2.png',
+      kitchen: '/properties/prop3.png',
+      balcony: '/properties/prop1.png',
+      bedroom: '/properties/prop2.png',
+      bathroom: '/properties/prop3.png',
+    },
     status: 'Hot',
   },
   {
@@ -42,6 +70,13 @@ export const featuredProperties: Property[] = [
     baths: 3,
     sqft: 3100,
     image: '/properties/prop3.png',
+    images: {
+      main: '/properties/prop3.png',
+      kitchen: '/properties/prop1.png',
+      balcony: '/properties/prop2.png',
+      bedroom: '/properties/prop3.png',
+      bathroom: '/properties/prop1.png',
+    },
     status: 'Reduced',
   },
 ];

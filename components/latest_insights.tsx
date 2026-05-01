@@ -15,7 +15,7 @@ const LatestInsights = () => {
             <h2 className="text-4xl font-bold text-gray-900">Latest Insights</h2>
             <p className="text-gray-500 mt-2">Expert advice and news from the front-line of the property market.</p>
           </div>
-          <Link href="/blog" className="hidden md:flex items-center gap-2 text-gray-900 font-bold hover:text-red-600 transition-colors">
+          <Link href="/about/blogs" className="hidden md:flex items-center gap-2 text-gray-900 font-bold hover:text-red-600 transition-colors">
             View all posts <ArrowRight size={20} />
           </Link>
         </div>

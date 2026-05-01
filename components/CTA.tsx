@@ -1,4 +1,5 @@
 import React from 'react';
+import Link from 'next/link';
 import { Target, Clock4, KeyRound, CheckCircle } from 'lucide-react';
 
 const blocks = [
@@ -8,16 +9,18 @@ const blocks = [
     title: "Your next chapter starts with us.",
     description: "Whether you're moving in or moving up, we make the journey effortless. Access exclusive listings, 24/7 maintenance support, and flexible viewing times.",
     buttonText: "Find Your Home",
+    href: "/properties",
     icon: KeyRound,
     reverse: false, // Standard layout: Text on left, Image on right
   },
   {
     id: 2,
     image: "/images/cta-portfolio.png", // Replace with your generated image path
-    title: "Maximize your portfolio's potential.",
-    description: "Unlock high-yield investment opportunities and expert asset management. We provide data-driven insights to minimize vacancies and maximize ROI for landlords.",
-    buttonText: "Maximize ROI",
-    icon: Target,
+    title: "Ready to sell or let? Get a free valuation.",
+    description: "Discover the true market value of your property with our expert appraisal service. We provide detailed insights and strategic advice to help you achieve the best possible result.",
+    buttonText: "Book Your Evaluation",
+    href: "/evaluation",
+    icon: Clock4,
     reverse: true, // Reversed layout: Image on left, Text on right
   },
 ];
@@ -62,11 +65,11 @@ const CTA = () => {
                 </div>
               )}
 
-              <button className="inline-flex items-center gap-2.5 bg-red-600 hover:bg-red-700 text-white px-8 py-4 rounded-xl font-bold transition-all group">
+              <Link href={block.href} className="inline-flex items-center gap-2.5 bg-red-600 hover:bg-red-700 text-white px-8 py-4 rounded-xl font-bold transition-all group">
                 <block.icon size={20} />
                 {block.buttonText}
                 <span className="group-hover:translate-x-1.5 transition-transform">→</span>
-              </button>
+              </Link>
             </div>
 
             {/* Image Side */}
