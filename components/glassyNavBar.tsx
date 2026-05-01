@@ -157,7 +157,7 @@ const GlassyNavBar = () => {
         {/* Logo */}
         <div className="flex-shrink-0">
           <Link href="/">
-            <Image src='/logo.png' alt='Logo' width={150} height={70} className="w-auto" />
+            <Image src='/logo.png' alt='Logo' width={150} height={70} className="w-auto h-8 sm:h-10 md:h-12" />
           </Link>
         </div>
 
