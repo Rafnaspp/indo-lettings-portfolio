@@ -77,7 +77,7 @@ const PropertyFilter: React.FC<FilterProps> = ({
       <div className="max-w-7xl mx-auto flex flex-row items-center gap-3 text-black">
         
         {/* Rent/Buy Toggle */}
-        <div className="flex bg-gray-100 p-1 rounded-xl shrink-0 w-32 md:w-40">
+        <div className="flex bg-gray-100 p-1 rounded-xl shrink-0 w-32 ">
           <button 
             onClick={() => setMode('rent')}
             className={`flex-1 lg:flex-none px-4 py-1.5 rounded-lg text-xs font-bold transition-all ${mode === 'rent' ? 'bg-white text-red-600 shadow-sm' : 'text-gray-900 hover:text-black'}`}

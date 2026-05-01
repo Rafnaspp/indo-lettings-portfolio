@@ -155,10 +155,10 @@ const Navbar = () => {
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50">
-      <div className={`transition-all flex justify-between items-center duration-300 ease-in-out mx-auto ${
+      <div className={`transition-all flex justify-between items-center duration-300 ease-in-out ${
         isScrolled 
-          ? "max-w-7xl w-[94%] bg-white/40 backdrop-blur-md rounded-full shadow-lg py-1 px-8 mt-2" 
-          : "max-w-full w-full bg-transparent py-2 px-12"
+          ? "w-[98%] bg-white/40 backdrop-blur-md rounded-full shadow-lg py-1 px-10 mt-2 mx-auto" 
+          : "w-full bg-transparent py-4 px-12"
       }`}>
         
         {/* Logo Area - Increased size, minimal wrapper padding */}

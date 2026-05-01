@@ -42,7 +42,7 @@ const Hero = () => {
           </p>
 
           {/* Search Container */}
-          <div className="bg-white/10 backdrop-blur-md p-2 rounded-3xl border border-white/20 shadow-2xl w-full">
+          <div className="mb-16 md:mb-0 bg-white/10 backdrop-blur-md p-2 rounded-3xl border border-white/20 shadow-2xl w-full">
             <div className="flex flex-col md:flex-row items-center gap-4">
               
               {/* 1. Search Input (Widest) */}
@@ -63,16 +63,16 @@ const Hero = () => {
               </div>
 
               {/* 2. Rent/Buy Toggle (Smaller) */}
-              <div className="flex bg-gray-100 p-1.5 rounded-2xl shrink-0 w-auto gap-2 h-7">
+              <div className="flex bg-gray-100 p-1.5 rounded-2xl flex-1 md:flex-none w-auto gap-2 h-[50px]">
                 <button
                   onClick={() => setMode('rent')}
-                  className={`flex-1 px-6 py-1 rounded-xl h-7 text-sm font-bold transition-all ${mode === 'rent' ? 'bg-white text-red-600 shadow-sm' : 'text-gray-900 hover:text-black'}`}
+                  className={`flex-1 px-6 rounded-xl h-full text-sm font-bold transition-all ${mode === 'rent' ? 'bg-white text-red-600 shadow-sm' : 'text-gray-900 hover:text-black'}`}
                 >
                   Rent
                 </button>
                 <button
                   onClick={() => setMode('buy')}
-                  className={`flex-1 px-6 rounded-xl text-sm font-bold transition-all ${mode === 'buy' ? 'bg-white text-red-600 shadow-sm' : 'text-gray-900 hover:text-black'}`}
+                  className={`flex-1 px-6 rounded-xl h-full text-sm font-bold transition-all ${mode === 'buy' ? 'bg-white text-red-600 shadow-sm' : 'text-gray-900 hover:text-black'}`}
                 >
                   Buy
                 </button>
@@ -81,7 +81,7 @@ const Hero = () => {
               {/* 3. Search Button (Smaller) */}
               <button 
                 onClick={handleSearch} 
-                className="w-full md:w-auto bg-red-600 hover:bg-red-700 text-white px-4 py-1 h-[72px] rounded-2xl font-bold flex items-center justify-center gap-2 transition-all shrink-0"
+                className="w-full md:w-auto bg-red-600 hover:bg-red-700 text-white px-8 py-1 h-[72px] rounded-2xl font-bold flex items-center justify-center gap-2 transition-all shrink-0"
               >
                 <Search size={18} />
                 <span>Search</span>
