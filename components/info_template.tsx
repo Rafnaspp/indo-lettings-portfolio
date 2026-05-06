@@ -3,7 +3,7 @@ import React from 'react';
 
 interface InfoTemplateProps {
   title: string;
-  subtitle: string;
+  subtitle?: string;
   content: React.ReactNode;
   sidebar?: React.ReactNode;
 }
@@ -17,9 +17,11 @@ const InfoTemplate = ({ title, subtitle, content, sidebar }: InfoTemplateProps) 
           <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6 leading-tight">
             {title}
           </h1>
+        {subtitle && (
           <p className="text-xl text-gray-500 leading-relaxed">
             {subtitle}
           </p>
+        )}
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
