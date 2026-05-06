@@ -169,7 +169,7 @@ const Navbar = () => {
               alt='Logo'
               width={260} 
               height={95}
-              className={`w-auto h-12 md:h-14 transition-all duration-300 ${
+              className={`w-auto h-8 sm:h-10 md:h-12 transition-all duration-300 ${
                 isScrolled ? "" : "brightness-0 invert"
               }`}
             />

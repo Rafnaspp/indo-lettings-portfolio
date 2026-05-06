@@ -96,15 +96,15 @@ const Hero = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="bg-white rounded-xl shadow-xl grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-gray-100 py-8 border border-gray-100">
             <div className="flex flex-col items-center justify-center p-4">
-              <span className="text-3xl font-bold text-gray-900">12,500+</span>
-              <span className="text-gray-500 uppercase tracking-wider text-xs font-semibold mt-1">Properties Sold</span>
+              <span className="text-3xl font-bold text-gray-900">600+</span>
+              <span className="text-gray-500 uppercase tracking-wider text-xs font-semibold mt-1">Properties Rented</span>
             </div>
             <div className="flex flex-col items-center justify-center p-4">
-              <span className="text-3xl font-bold text-gray-900">480+</span>
-              <span className="text-gray-500 uppercase tracking-wider text-xs font-semibold mt-1">Lettings Managed</span>
+              <span className="text-3xl font-bold text-gray-900">280+</span>
+              <span className="text-gray-500 uppercase tracking-wider text-xs font-semibold mt-1">Lettings Managing</span>
             </div>
             <div className="flex flex-col items-center justify-center p-4">
-              <span className="text-3xl font-bold text-gray-900">14 Days</span>
+              <span className="text-3xl font-bold text-gray-900">2 Months</span>
               <span className="text-gray-500 uppercase tracking-wider text-xs font-semibold mt-1">Avg. Sale Time</span>
             </div>
           </div>
