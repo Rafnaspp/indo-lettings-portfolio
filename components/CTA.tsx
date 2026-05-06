@@ -5,7 +5,7 @@ import { Target, Clock4, KeyRound, CheckCircle } from 'lucide-react';
 const blocks = [
   {
     id: 1,
-    image: "/images/cta-living-room.png", // Replace with your generated image path
+    image: "/images/cta-living-room.jpg", // Replace with your generated image path
     title: "Your next chapter starts with us.",
     description: "Whether you're moving in or moving up, we make the journey effortless. Access exclusive listings, 24/7 maintenance support, and flexible viewing times.",
     buttonText: "Find Your Home",
@@ -15,7 +15,7 @@ const blocks = [
   },
   {
     id: 2,
-    image: "/images/cta-portfolio.png", // Replace with your generated image path
+    image: "/images/cta-portfolio.jpg", // Replace with your generated image path
     title: "Ready to sell or let? Get a free valuation.",
     description: "Discover the true market value of your property with our expert appraisal service. We provide detailed insights and strategic advice to help you achieve the best possible result.",
     buttonText: "Book Your Evaluation",
@@ -29,7 +29,9 @@ const features = [
   "Advanced Search Matching",
   "Transparent Fees & Accounting",
   "Digital Contract Management",
-  "24/7 Dedicated Support"
+  "24/7 Dedicated Support",
+  "Legal Support",
+  "Eviction Process"
 ];
 
 const CTA = () => {

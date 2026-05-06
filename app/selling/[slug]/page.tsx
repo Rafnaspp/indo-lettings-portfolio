@@ -12,8 +12,30 @@ import { Box, Camera, Zap, Award } from 'lucide-react';
 const sellingContent: any = {
   'why-choose-us': {
     title: "Why sell with IndoLettings?",
-    subtitle: "Premium marketing and expert negotiation to unlock your property's value.",
-    body: "We combine high-end studio photography with targeted digital marketing to ensure your property reaches the right buyers. Our agents are local experts dedicated to achieving the best possible price for your home."
+    subtitle: "Strategic marketing and expert negotiation to unlock your property's maximum value.",
+    body: "Selling in East London requires more than just a listing; it requires a strategy. At IndoLettings, we combine hyper-local E1 market intelligence with high-end production to ensure your home stands out in a crowded market. From Shoreditch penthouses to Whitechapel family homes, we navigate the complexities of the London market to deliver a seamless exit.",
+    features: [
+      { 
+        title: "Multi-Channel Exposure", 
+        desc: "Your property is spotlighted on Rightmove, Zoopla, and OnTheMarket, plus targeted social media ads.",
+        icon: <Zap size={20}/> 
+      },
+      { 
+        title: "Bespoke Media Suite", 
+        desc: "Professional HDR photography, detailed floorplans, and immersive video tours as standard.",
+        icon: <Camera size={20}/> 
+      },
+      { 
+        title: "Local Market Authority", 
+        desc: "Deep-rooted knowledge of E1 postcodes ensures accurate valuations that drive genuine interest.",
+        icon: <Award size={20}/> 
+      },
+      { 
+        title: "Sales Progression", 
+        desc: "A dedicated point of contact to manage the chain and expedite the legal process to completion.",
+        icon: <Box size={20}/> 
+      }
+    ]
   },
   'sales-faq': {
     title: "Sales FAQs",
@@ -70,6 +92,7 @@ const SellingDynamicPage = () => {
   return (
     <>
       <GlassyNavBar/>
+      
       <InfoTemplate 
         title={data.title}
         subtitle={data.subtitle}
@@ -100,18 +123,28 @@ const SellingDynamicPage = () => {
 
             {data.isFaq && <FAQSection items={salesFaqs} title="Selling Questions" />}
 
-            {slug === 'why-choose-us' && (
-               <div className="grid grid-cols-2 gap-4">
-                  <div className="p-6 border border-gray-100 rounded-2xl flex items-center gap-4">
-                    <div className="p-3 bg-red-50 text-red-600 rounded-xl"><Zap size={20}/></div>
-                    <span className="font-bold text-sm">Fast Turnaround</span>
-                  </div>
-                  <div className="p-6 border border-gray-100 rounded-2xl flex items-center gap-4">
-                    <div className="p-3 bg-red-50 text-red-600 rounded-xl"><Award size={20}/></div>
-                    <span className="font-bold text-sm">Award Winning</span>
-                  </div>
-               </div>
-            )}
+            {slug === 'why-choose-us' && data.features && (
+  <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-10">
+    {data.features.map((feature, index) => (
+      <div 
+        key={index} 
+        className="p-8 border border-gray-100 rounded-[32px] bg-white hover:shadow-xl hover:shadow-gray-200/40 transition-all duration-500 group"
+      >
+        <div className="flex flex-col gap-5">
+          <div className="w-12 h-12 bg-red-50 text-red-600 rounded-2xl flex items-center justify-center group-hover:bg-red-600 group-hover:text-white transition-colors duration-300">
+            {feature.icon}
+          </div>
+          <div>
+            <h5 className="font-bold text-gray-900 text-lg mb-2">{feature.title}</h5>
+            <p className="text-gray-500 text-sm leading-relaxed">
+              {feature.desc}
+            </p>
+          </div>
+        </div>
+      </div>
+    ))}
+  </div>
+)}
           </div>
         }
       />

@@ -52,7 +52,7 @@ export default async function SolutionDetailPage({ params }: Props) {
           </div>
 
           <div className="pt-8 border-t border-gray-100">
-            <Link href="/about" className="text-gray-500 hover:text-red-600 transition-colors inline-flex items-center gap-2">
+            <Link href="/" className="text-gray-500 hover:text-red-600 transition-colors inline-flex items-center gap-2">
               &larr; Back to all solutions
             </Link>
           </div>
