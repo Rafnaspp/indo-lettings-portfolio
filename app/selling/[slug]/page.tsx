@@ -9,7 +9,25 @@ import GlassyNavBar from '@/components/glassyNavBar';
 import Footer from '@/components/footer';
 import { Box, Camera, Zap, Award } from 'lucide-react';
 
-const sellingContent: any = {
+interface SellingFeature {
+  title: string;
+  desc: string;
+  icon: React.ReactNode;
+}
+
+interface SellingPageData {
+  title: string;
+  subtitle?: string;
+  body?: string;
+  features?: SellingFeature[];
+  isFaq?: boolean;
+  isStampDuty?: boolean;
+  isValuation?: boolean;
+  isMortgage?: boolean;
+  is3D?: boolean;
+}
+
+const sellingContent: Record<string, SellingPageData> = {
   'why-choose-us': {
     title: "Why sell with IndoLettings?",
     subtitle: "Strategic marketing and expert negotiation to unlock your property's maximum value.",
@@ -125,7 +143,7 @@ const SellingDynamicPage = () => {
 
             {slug === 'why-choose-us' && data.features && (
   <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-10">
-    {data.features.map((feature, index) => (
+    {data.features.map((feature: SellingFeature, index: number) => (
       <div 
         key={index} 
         className="p-8 border border-gray-100 rounded-[32px] bg-white hover:shadow-xl hover:shadow-gray-200/40 transition-all duration-500 group"
