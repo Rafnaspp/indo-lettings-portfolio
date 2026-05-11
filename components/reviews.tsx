@@ -1,6 +1,6 @@
 "use client";
 import React, { useRef } from 'react';
-import { Star, Quote, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Quote, ChevronLeft, ChevronRight, Star } from 'lucide-react';
 import { reviews } from '../data/review';
 
 const Reviews = () => {
@@ -8,93 +8,80 @@ const Reviews = () => {
 
   const scroll = (direction: 'left' | 'right') => {
     if (scrollContainerRef.current) {
-      // Calculate scroll amount based on the width of one card plus the gap.
-      // Assuming each card has min-w-[calc(50%-0.75rem)] and there's a gap-6 (1.5rem = 24px).
       const firstCard = scrollContainerRef.current.children[0] as HTMLElement;
       if (firstCard) {
         const cardWidth = firstCard.offsetWidth;
-        const gapWidth = 24; // gap-6 is 1.5rem, assuming 1rem = 16px, so 24px
+        const gapWidth = 24;
         const scrollAmount = cardWidth + gapWidth;
-
-        scrollContainerRef.current.scrollBy({ left: direction === 'left' ? -scrollAmount : scrollAmount, behavior: 'smooth' });
+        scrollContainerRef.current.scrollBy({ 
+          left: direction === 'left' ? -scrollAmount : scrollAmount, 
+          behavior: 'smooth' 
+        });
       }
     }
   };
 
   return (
-    <section className="py-24 bg-white overflow-hidden">
+    <section className="py-16 bg-white overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        {/* Changed from col-span-4 to col-span-12 to span full width */}
+        <div className="w-full bg-[#e6fcf5] p-8 md:p-12 rounded-3xl flex flex-col md:flex-row items-center justify-between text-center md:text-left text-black shadow-sm border border-[#c2f2e1]">
           
-          {/* Left Side: Summary Card */}
-          <div className="lg:col-span-4 bg-gray-50 p-10 rounded-3xl border border-gray-100 flex flex-col items-start">
+          <div className="flex flex-col items-center md:items-start">
+            <h2 className="text-4xl font-bold mb-2">Excellent</h2>
+            
+            {/* Trustpilot Stars */}
             <div className="flex gap-1 mb-4">
               {[...Array(5)].map((_, i) => (
-                <Star key={i} size={24} className="fill-red-600 text-red-600" />
+                <div key={i} className="bg-[#00b67a] p-1 shadow-sm">
+                  <Star size={20} className="fill-white text-white" />
+                </div>
               ))}
             </div>
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">Excellent</h2>
-            <p className="text-gray-600 mb-8">
-              Based on <span className="font-bold text-gray-900">1,200+ reviews</span> on Trustpilot and Google.
+
+            <p className="text-gray-600 text-sm font-medium">
+              Based on <span className="font-bold underline text-black">6,248 reviews</span>
             </p>
+          </div>
+          
+          {/* Trustpilot Logo Area */}
+          <div className="flex flex-col items-center md:items-end mt-8 md:mt-0">
+            <div className="flex items-center gap-2">
+              <Star className="fill-[#00b67a] text-[#00b67a]" size={32} />
+              <span className="text-2xl font-bold tracking-tight text-black">Trustpilot</span>
+            </div>
             
-            <div className="flex gap-3 mt-auto">
+            {/* Navigation Buttons Commented Out */}
+            {/* <div className="flex gap-3 mt-6">
               <button 
                 onClick={() => scroll('left')}
-                className="p-3 rounded-full border border-gray-200 hover:bg-white hover:shadow-md transition-all"
+                className="p-3 rounded-full bg-white border border-gray-200 hover:bg-gray-50 transition-all shadow-sm"
               >
-                <ChevronLeft size={20} />
+                <ChevronLeft size={20} className="text-black" />
               </button>
               <button 
                 onClick={() => scroll('right')}
-                className="p-3 rounded-full border border-gray-200 hover:bg-white hover:shadow-md transition-all"
+                className="p-3 rounded-full bg-white border border-gray-200 hover:bg-gray-50 transition-all shadow-sm"
               >
-                <ChevronRight size={20} />
+                <ChevronRight size={20} className="text-black" />
               </button>
-            </div>
+            </div> 
+            */}
           </div>
-
-          {/* Right Side: Individual Reviews */}
-          <div ref={scrollContainerRef} className="lg:col-span-8 flex gap-6 overflow-x-scroll scroll-smooth pb-4">
-            {reviews.map((review) => (
-              <div 
-                key={review.id} 
-                // min-w-[calc(50%-0.75rem)] ensures two cards fit side-by-side with a gap-6 (1.5rem = 24px)
-                // 0.75rem is half of the gap, so 50% of container width minus half the gap.
-                className="min-w-[calc(50%-0.75rem)] bg-white p-8 rounded-3xl border border-gray-100 shadow-sm hover:shadow-lg transition-all relative"
-              >
-                {/* Star Rating */}
-                <div className="flex gap-1 mb-6">
-                  {[...Array(review.rating)].map((_, i) => (
-                    <Star key={i} size={16} className="fill-red-600 text-red-600" />
-                  ))}
-                </div>
-
-                {/* Quote Text */}
-                <p className="text-gray-700 leading-relaxed mb-8 italic">
-                  "{review.content}"
-                </p>
-
-                {/* Profile Info */}
-                <div className="flex items-center gap-4">
-                  <img 
-                    src={review.image} 
-                    alt={review.name} 
-                    className="w-12 h-12 rounded-full border-2 border-red-50"
-                  />
-                  <div>
-                    <h4 className="font-bold text-gray-900 leading-none">{review.name}</h4>
-                    <span className="text-sm text-gray-500">{review.role}</span>
-                  </div>
-                </div>
-
-                {/* Decorative Quote Icon */}
-                <Quote className="absolute top-8 right-8 text-red-50 w-12 h-12 -z-0 opacity-50" />
-              </div>
-            ))}
-          </div>
-
         </div>
+
+        {/* Right Side: Individual Reviews - COMMENTED OUT AS REQUESTED */}
+        {/* <div 
+          ref={scrollContainerRef} 
+          className="mt-12 flex gap-6 overflow-x-scroll scroll-smooth pb-6 no-scrollbar"
+        >
+          {reviews.map((review) => (
+            <div key={review.id} ...>
+              ...
+            </div>
+          ))} 
+        </div> 
+        */}
       </div>
     </section>
   );
