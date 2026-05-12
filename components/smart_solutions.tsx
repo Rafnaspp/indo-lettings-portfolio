@@ -1,14 +1,23 @@
+"use client";
+
 import React from 'react';
 import Link from 'next/link';
+import { motion } from 'framer-motion'; // Import motion
 import { smartSolutions, Solution } from '../data/solutions';
 
 const SmartSolutions = () => {
   return (
-    <section className="py-20 bg-gray-50">
+    <section className="py-20 bg-gray-50 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         
-        {/* Section Header */}
-        <div className="mb-16">
+        {/* Section Header - Slides up from bottom */}
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="mb-16"
+        >
           <div className="w-12 h-1 bg-red-600 mx-auto mb-6"></div>
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
             Smart solutions for every property
@@ -17,13 +26,22 @@ const SmartSolutions = () => {
             We leverage the latest technology to simplify the rental process, 
             providing a seamless experience for both landlords and tenants.
           </p>
-        </div>
+        </motion.div>
 
         {/* Solutions Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {smartSolutions.map((solution: Solution, index: number) => (
-            <div 
-              key={index} 
+            <motion.div 
+              key={index}
+              // Cards will pop in from the bottom with a slight scale increase
+              initial={{ opacity: 0, y: 40, scale: 0.95 }}
+              whileInView={{ opacity: 1, y: 0, scale: 1 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ 
+                duration: 0.5, 
+                delay: index * 0.15, // Creates the staggered loading effect
+                ease: "easeOut" 
+              }}
               className="bg-white p-10 rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow group text-center"
             >
               {/* Icon Container */}
@@ -49,7 +67,7 @@ const SmartSolutions = () => {
               >
                 Learn More &rarr;
               </Link>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>
