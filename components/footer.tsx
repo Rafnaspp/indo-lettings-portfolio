@@ -47,7 +47,7 @@
   { name: 'The Property Ombudsman', src: '/logos/prs.png' },
   { name: 'My Deposits', src: '/logos/mydeposits.png',isWhite:true },
   { name: 'Client Money Protect', src: '/logos/cmp.png', isWhite: true }, // Added flag
-  { name: 'TDS', src: '/logos/tds.png', isSmall: true },                 // Added flag
+  { name: 'TDS', src: '/logos/tds.png', isSmall: false },                 // Added flag
   { name: 'Propertymark', src: '/logos/propertymark.png', isSmall: true }, // Added flag
 ];
 
